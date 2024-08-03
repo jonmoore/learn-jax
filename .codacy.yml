@@ -1,0 +1,8 @@
+---
+exclude_paths:
+  - 'learn_jax/_version.py'
+  - 'tests/**/*'
+  - 'tests/*'
+  - 'benchmarks/**/*'
+  - 'setup.py'
+  - 'versioneer.py'
