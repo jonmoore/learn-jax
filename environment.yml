@@ -1,0 +1,27 @@
+# this specifies the non-locked requirements for the base build environment
+
+# https://github.com/conda/cookiecutter-conda-python suggests using
+#
+# conda install conda-build hatch hatchling hatch-vcs
+#
+# to set this up; we also add some other packages
+
+name: blj
+channels:
+  - defaults
+  - conda-forge
+
+# pip is needed to avoid a KeyError from conda-lock when run against this file
+dependencies:
+  - conda=24.7.1
+  - conda-build=24.7.1
+  - conda-lock=2.5.6
+  - conda-tree=1.1.0
+  - hatch=1.12.0
+  - hatch-vcs=0.3.0
+  - hatchling=1.25.0
+  - pip=24.0
+prefix: D:\conda\envs\blj
+platforms:
+  - win-64
+  - linux-64
