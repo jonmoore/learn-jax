@@ -14,7 +14,9 @@ classifiers = [
   "Topic :: Software Development :: Libraries :: Python Modules"
 ]
 dependencies = [
-  # package requirements go here
+  # package requirements go here.  these get interpolated into requirements.run in conda's
+  # meta.yaml
+  "numpy",
   "jax"
 ]
 description = "Materials for learning JAX"

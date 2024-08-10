@@ -39,6 +39,8 @@ requirements:
 test:
   imports:
     - learn_jax
+    - jax
+    - numpy
   source_files:
     - tests
   requires:
@@ -46,12 +48,15 @@ test:
     - {{ dep.lower() }}
     {% endfor %}
   commands:
+    # Checking that __version__ inferred from the code (which is created through some
+    # a hook for hatch) matches that passed through the VERSION environment variable to the
+    # version jinja variable
+    - python -c 'from learn_jax import __version__; print(f"JM {__version__=} expected {{ version }}")'
+    - python -c 'from learn_jax import __version__; assert __version__ == "{{ version }}"'
     - pytest
-    
-    - python -c "from learn_jax import __version__; assert __version__ == \"{{ version }}\""
 
 about:
-  home: https://github.com/jonmoore/learn_jax
+  home: https://github.com/jonmoore/learn-jax
   summary: Materials for learning JAX
   license: {{ pyproject.get('license') }}
   license_file: LICENSE
