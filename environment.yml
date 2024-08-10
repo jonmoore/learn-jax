@@ -21,6 +21,7 @@ dependencies:
   - hatch-vcs=0.3.0
   - hatchling=1.25.0
   - pip=24.0
+  - shellcheck
 prefix: D:\conda\envs\blj
 platforms:
   - win-64
