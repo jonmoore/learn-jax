@@ -81,12 +81,6 @@ venv.bak/
 .dmypy.json
 dmypy.json
 
-# Pyre type checker
-.pyre/
-
-# pytype static type analyzer
-.pytype/
-
 # pyenv python configuration file
 .python-version
 
@@ -96,3 +90,6 @@ src/learn_jax/_version.py
 # commonly used filenames for saving output locally
 build.out
 build.err
+
+# local tmp directory
+tmp/

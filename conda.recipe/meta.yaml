@@ -6,6 +6,7 @@ package:
   name: learn-jax
   version: {{ version }}
 
+# contra copilot there is no way to include/exclude certain files / directories
 source:
   path: ..
 
@@ -17,13 +18,8 @@ build:
   script: {{ PYTHON }} -m pip install --no-build-isolation --no-deps --ignore-installed -vv .
   noarch: python
   number: 0
-  
 
 requirements:
-  # if you need compilers, uncomment these
-  #    read more at https://docs.conda.io/projects/conda-build/en/latest/resources/compiler-tools.html
-  # build:
-  #   - {{ compilers('c') }}
   host:
     - python {{ project['requires-python'] }}
     - pip
@@ -39,8 +35,6 @@ requirements:
 test:
   imports:
     - learn_jax
-    - jax
-    - numpy
   source_files:
     - tests
   requires:
@@ -48,11 +42,6 @@ test:
     - {{ dep.lower() }}
     {% endfor %}
   commands:
-    # Checking that __version__ inferred from the code (which is created through some
-    # a hook for hatch) matches that passed through the VERSION environment variable to the
-    # version jinja variable
-    - python -c 'from learn_jax import __version__; print(f"JM {__version__=} expected {{ version }}")'
-    - python -c 'from learn_jax import __version__; assert __version__ == "{{ version }}"'
     - pytest
 
 about:

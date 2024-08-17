@@ -61,6 +61,9 @@ include = [
   "/pyproject.toml"
 ]
 
+[[tool.hatch.envs.hatch-test.matrix]]
+python = ["3.12"]
+  
 [tool.hatch.version]
 source = "vcs"
 

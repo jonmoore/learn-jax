@@ -6,7 +6,7 @@
 #
 # to set this up; we also add some other packages
 
-name: blj
+name: jax
 channels:
   - defaults
   - conda-forge
@@ -22,7 +22,9 @@ dependencies:
   - hatchling=1.25.0
   - pip=24.0
   - shellcheck
-prefix: D:\conda\envs\blj
+  - pytest
+  - pytest-cov
+# prefix: D:\conda\envs\blj
 platforms:
   - win-64
   - linux-64
