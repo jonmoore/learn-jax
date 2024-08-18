@@ -1,32 +1,42 @@
 # learn-jax
 For working through JAX tutorials, playing around, etc.
 
+# Usage
+Run these from the workspace root directory unless mentioned otherwise.
+
+## lock.sh
+Create a `conda-lock.yml` file based on `environment.yml`.
+
+## run_all.sh
+Runs most of the commands below to go through a complete build/test sequence.
+
+## init.sh
+Create a conda environment called `jax` based on `conda-lock.yml`
+
+## clean.sh
+Clean stale files using hatch, conda and coverage
+
+## build.sh
+Invoke `conda-build` to perform its own build and test, leaving behind working directories, environments, etc.
+
+## install\_from\_local.sh
+Remove the installed `learn_jax` package from the conda-build test environment and link the local src directory into this using a `.pth` file.  If run, this will affect the outcomes of both test scripts below.
+
+## test-conda.sh
+Run the installed tests that are run by conda-build, using the conda-build test environment.
+
+## test-local.sh
+Run the local tests (under `tests`) using the conda-build test environment.
+
 # Questions
 
-Is using hatch worth the dependency?  Known uses
+## Is using hatch worth the dependency?
+
+Known uses
 - for calculating a version, through "hatch version"
 - ...
 
-How to set up an editable dev environment? Current best guess
-
-1. build our conda package
--   build using conda-build
-2. install the local files to the active environment along with dependencies
-- conda install --use-local learn-jax
-3. remove the installed package but leave the dependencies
-- conda remove --force learn-jax
-4. use pip to install the package but leave it editable
-- pip install --no-build-isolation --no-deps -e .
-
-Note that conda develop has been confirmed as broken / deprecated by the maintainers for
-years now, even though they haven't put this in the docs.
-
-Refs:
-
-- https://github.com/conda/conda-build/issues/4251#issuecomment-1053460542
-- https://github.com/conda/conda-build/pull/5380
-
-What are the environments that conda-build uses?
+## What are the environments that conda-build uses?
 
 According to chatgpt / editing.
 

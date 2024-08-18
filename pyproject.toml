@@ -23,7 +23,7 @@ description = "Materials for learning JAX"
 dynamic = ["version"]
 license = {text = "MIT"}
 name = "learn_jax"
-readme = "README.rst"
+readme = "README.md"
 requires-python = ">=3.12"
 
 [project.optional-dependencies]

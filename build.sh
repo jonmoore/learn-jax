@@ -44,6 +44,9 @@ if [[ -z "$mode" ]]; then
     exit 1
 fi
 
+script_dir=$(dirname "$(realpath "$0")")
+source "$script_dir/functions.sh"
+jm_activate "jax"
 
 if ! VERSION=$(hatch version); then
     echo "Error: calling 'hatch version' failed."
@@ -67,42 +70,11 @@ echo running with VERSION set to "$VERSION"
 #
 # conda debug: https://docs.conda.io/projects/conda-build/en/stable/user-guide/recipes/debugging.html
 case "$mode" in
-    # leaving only things that are working as intended or under active dev
-    # commenting things that are still not working as desired,
     build)
         conda build --dirty conda.recipe
         ;;
-    #     conda install -y --use-local learn-jax
-    # dirty)
-    #     conda build --dirty conda.recipe
-    #     conda install -y --use-local learn-jax
-    #     ;;
-    # dev)
-    #     #        conda build --build-only --dirty conda.recipe
-    #     conda build --dirty conda.recipe
-    #     # conda install -y --use-local learn-jax
-    #     # conda remove --force learn-jax
-    #     # # This is similar to what meta.yaml uses.  Maybe we can use that instead?
-    #     # python -m pip install --no-build-isolation --no-deps --ignore-installed -vv .
-    #     # source activate  /home/moorjona/miniconda3/envs/jax/conda-bld/learn-jax_1723504425996/_build_env
-    #     ;;
     debug)
-          conda debug conda.recipe
-          # This results in
-
-          # a suggested setup command like
-          # cd /home/moorjona/miniconda3/envs/jax/conda-bld/debug_1723907935504/work && source /home/moorjona/miniconda3/envs/jax/conda-bld/debug_1723907935504/work/build_env_setup.sh
-
-          # work now contains a copy of all the files in the original git worktree plus the following
-          # - build_env_setup.sh
-          # - conda_build.sh
-          # - metadata_conda_debug.yaml
-          
-          # files as follows
-          # find ~ -type f  -name jmjax.py
-          # /home/moorjona/git/jonmoore/learn-jax/src/learn_jax/jmjax.py
-          # /home/moorjona/miniconda3/envs/jax/conda-bld/debug_1723907935504/work/src/learn_jax/jmjax.py
-
+        conda debug conda.recipe
         ;;
     *)
         echo "Unknown mode: $mode"
