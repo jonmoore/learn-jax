@@ -1,6 +1,13 @@
 #!/usr/bin/env bash
 
-jm_assert_jax_env() {
+    # set +e
+    # local errexit_state=$(set +o | grep -E 'errexit')
+    # eval "$errexit_state"
+
+################################################################################
+# begin from functions.sh
+################################################################################
+_jm_assert_jax_env() {
     local conda_env="$1"
     echo "Checking if conda environment '$conda_env' is activated."
 
@@ -10,7 +17,7 @@ jm_assert_jax_env() {
     fi
 }
 
-jm_activate() {
+_jm_activate() {
     local conda_env="$1"
     echo "Ensuring conda environment '$conda_env' is activated."
 
@@ -21,12 +28,12 @@ jm_activate() {
         conda activate "$conda_env"
     fi
 
-    jm_assert_jax_env "$conda_env"
+    _jm_assert_jax_env "$conda_env"
 }
 
-jm_find_one_file() {
+_jm_find_one_file() {
     # Example usage
-    # result=$(jm_find_one_file "/path/to/directory" f "filename.txt")
+    # result=$(_jm_find_one_file "/path/to/directory" f "filename.txt")
     local directory="$1"
     local type="$2"
     local filename="$3"
@@ -42,8 +49,28 @@ jm_find_one_file() {
     fi
 }
 
-jm_test_init() {
+_jm_test_init() {
     source $(find $CONDA_PREFIX -type f -name conda_test_env_vars.sh)
     # Make the conda environment label in PS1 more useful
     PS1=$(echo "$PS1" | perl -pe 's/_placehold[^)]*\)/\)/' | perl -pe 's/\Q$ENV{HOME}\/miniconda3\/envs\/\E//')
 }
+
+################################################################################
+# end from functions.sh
+################################################################################
+
+
+
+
+function default {
+    help
+}
+
+function help {
+    echo "$0 <task> <args>"
+    echo "Tasks:"
+    compgen -A function | grep -v "^_jm" | cat -n
+}
+
+TIMEFORMAT="Task completed in %3lR"
+time ${@:-default}
